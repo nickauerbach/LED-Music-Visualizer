@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<title style = color: 'purple;'>Illuminate Your Music</title>
+<head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <style>
+
+        .sidenav {
+          width: 300px;
+          position: fixed;
+          z-index: 1;
+          top: 130px;
+          left: 20px;
+          overflow-x: hidden;
+          padding: 8px 0;
+          background-color: #D8BFD8;
+        }
+
+        .sidenav button {
+          background-color: purple;
+          border: none;
+          color: #D8BFD8;
+          padding: 16px 16px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-family: 'Verdana';
+          font-weight: bold;
+          font-size: 16px;
+          margin: 4px 2px;
+          width: 200px;
+          transition-duration: 1s;
+          cursor: pointer;
+
+        }
+
+        .sidenav button:hover {
+          background-color: #D8BFD8;
+          font-size: 20 px;
+          color: purple;
+          border: 0px purple;
+        }
+        /* colorpicker styles */
+        .colorpicker {
+            background-color: #222222;
+            border-radius: 5px 5px 5px 5px;
+            box-shadow: 2px 2px 2px #444444;
+            color: #FFFFFF;
+            font-size: 12px;
+            position: absolute;
+            width: 375px;
+            left: 450px;
+            top: 260px;
+        }
+        #picker {
+            cursor: crosshair;
+            float: none;
+            margin: 10px;
+            border: 0;
+        }
+        .controls {
+            float: right;
+            margin: 10px;
+        }
+        .controls > div {
+            border: 1px solid #2F2F2F;
+            margin-bottom: 5px;
+            overflow: hidden;
+            padding: 5px;
+        }
+        .controls label {
+            float: left;
+        }
+        .controls > div input {
+            background-color: #121212;
+            border: 1px solid #2F2F2F;
+            color: #DDDDDD;
+            float: right;
+            font-size: 10px;
+            height: 14px;
+            margin-left: 6px;
+            text-align: center;
+            text-transform: uppercase;
+            width: 75px;
+        }
+        .preview {
+            background: url("../static/preview.png") repeat scroll center center transparent;
+            border-radius: 3px;
+            box-shadow: 2px 2px 2px #444444;
+            cursor: pointer;
+            height: 30px;
+            width: 30px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+    </style>
+
+    <!-- Include Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
+    <h1 style="color:purple; font-family: Verdana; font-weight: bold; text-align: center; padding-top: 50px;">Illuminate Your Music</h1>
+    <h5 style="color:purple; font-family: Verdana; font-weight: bold; font-size: 20 px; text-align: center; padding-top: 10px;">Select your illumination pattern and desired color!</h5>
+    <h5 style="color:purple; font-family: Verdana; font-weight: bold; font-size: 20 px; text-align: center; padding-top: 10px; padding-bottom: 20 px;">Click the color picker below.</h5>
+</head>
+<body style="background-color:#D8BFD8;">
+
+    <div class="sidenav">
+      <button id="light_mode1" type="button">Slow Mode</button>
+      <button id="light_mode2" type="button">Medium Flash</button>
+      <button id="light_mode3" type="button">Strobe Party</button>
+      <button id="illuminate" type="button">Illuminate</button>
+      <button id="music_mode" type="button">Music Mode</button>
+    </div>
+
+    <!-- preview element -->
+    <div class="preview"></div>
+
+    <!-- colorpicker element -->
+    <div class="colorpicker" style="display:none">
+        <canvas id="picker" var="3" width="200" height="200"></canvas>
+
+        <div class="controls">
+            <div><label>R</label> <input type="text" id="rVal" /></div>
+            <div><label>G</label> <input type="text" id="gVal" /></div>
+            <div><label>B</label> <input type="text" id="bVal" /></div>
+            <div><label>RGB</label> <input type="text" id="rgbVal" /></div>
+            <div><label>HEX</label> <input type="text" id="hexVal" /></div>
+        </div>
+    </div>
+
+    <!-- Include jQuery and local JavaScript files -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="/static/dashboard.js"></script>
+    <script src="/static/colorpicker.js"></script>
+
+</body>
+</html>
