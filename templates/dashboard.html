@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <style>
-
         .sidenav {
           width: 300px;
           position: fixed;
@@ -16,7 +15,6 @@
           padding: 8px 0;
           background-color: #D8BFD8;
         }
-
         .sidenav button {
           background-color: purple;
           border: none;
@@ -32,16 +30,13 @@
           width: 200px;
           transition-duration: 1s;
           cursor: pointer;
-
         }
-
         .sidenav button:hover {
           background-color: #D8BFD8;
           font-size: 20 px;
           color: purple;
           border: 0px purple;
         }
-        /* colorpicker styles */
         .colorpicker {
             background-color: #222222;
             border-radius: 5px 5px 5px 5px;
@@ -94,18 +89,14 @@
             margin-left: auto;
             margin-right: auto;
         }
-
     </style>
-
     <!-- Include Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-
     <h1 style="color:purple; font-family: Verdana; font-weight: bold; text-align: center; padding-top: 50px;">Illuminate Your Music</h1>
     <h5 style="color:purple; font-family: Verdana; font-weight: bold; font-size: 20 px; text-align: center; padding-top: 10px;">Select your illumination pattern and desired color!</h5>
     <h5 style="color:purple; font-family: Verdana; font-weight: bold; font-size: 20 px; text-align: center; padding-top: 10px; padding-bottom: 20 px;">Click the color picker below.</h5>
 </head>
 <body style="background-color:#D8BFD8;">
-
     <div class="sidenav">
       <button id="light_mode1" type="button">Slow Mode</button>
       <button id="light_mode2" type="button">Medium Flash</button>
@@ -113,27 +104,18 @@
       <button id="illuminate" type="button">Illuminate</button>
       <button id="music_mode" type="button">Music Mode</button>
     </div>
-
-    <!-- preview element -->
     <div class="preview"></div>
-
-    <!-- colorpicker element -->
     <div class="colorpicker" style="display:none">
         <canvas id="picker" var="3" width="200" height="200"></canvas>
-
         <div class="controls">
             <div><label>R</label> <input type="text" id="rVal" /></div>
             <div><label>G</label> <input type="text" id="gVal" /></div>
             <div><label>B</label> <input type="text" id="bVal" /></div>
-            <div><label>RGB</label> <input type="text" id="rgbVal" /></div>
-            <div><label>HEX</label> <input type="text" id="hexVal" /></div>
         </div>
     </div>
-
     <!-- Include jQuery and local JavaScript files -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="/static/dashboard.js"></script>
     <script src="/static/colorpicker.js"></script>
-
 </body>
 </html>

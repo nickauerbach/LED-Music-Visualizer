@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 import json
 
+#initialize Flask app
 app = Flask(__name__)
 
 # # Importing modules for sensor
@@ -11,17 +12,17 @@ app = Flask(__name__)
 # import board
 # import neopixel
 #
-# # Start SPI connection
-# spi = spidev.SpiDev() # Created an object
-# spi.open(0,0)
-#
-# # Initializing LED pin as OUTPUT pin
-# GPIO.setmode(GPIO.BCM)
-#
-# # Initialize the LEDs
-# pixels = neopixel.NeoPixel(board.D18, 20)
-#
 # def Visualizer():
+#
+#     # Start SPI connection
+#     spi = spidev.SpiDev() # Created an object
+#     spi.open(0,0)
+#
+#     # Initializing LED pin as OUTPUT pin
+#     GPIO.setmode(GPIO.BCM)
+#
+#     # Initialize the LEDs
+#     pixels = neopixel.NeoPixel(board.D18, 20)
 #
 #     # Read MCP3008 data
 #     def analogInput(channel):
@@ -44,8 +45,11 @@ app = Flask(__name__)
 #         sleep(0.1)
 #         pixels.show()
 
-# def Light_Modes():
-#     print("")
+# def Light_Modes(mode):
+#     int mode = mode
+#     switch(mode) {
+#
+#     }
 
 
 @app.route("/")
@@ -99,7 +103,7 @@ def music_mode_on():
 
 @app.route("/music_mode_off", methods =["POST"])
 def music_mode_off():
-    Visualizer()
+    print("#5 off")
     return "ok"
 
 @app.route("/color_picker", methods =["GET", "POST"])

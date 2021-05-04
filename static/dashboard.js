@@ -1,4 +1,3 @@
-
 //event handling for different light mode buttons
 
 var button1 = $("#light_mode1");
