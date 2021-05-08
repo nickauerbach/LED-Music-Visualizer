@@ -19,7 +19,7 @@ $(function(){
             var pixel = imageData.data;
             var pixelColor = "rgb("+pixel[0]+", "+pixel[1]+", "+pixel[2]+")";
             $('.preview').css('backgroundColor', pixelColor);
-            //send color to Flask route: https://www.codegrepper.com/code-examples/typescript/how+to+pass+js+data+to+flask+and+bac
+            //send color to Flask route: https://www.codegrepper.com/code-examples/typescript/how+to+pass+js+data+to+flask+and+back
             const URL = '/color_picker'
             const xhr = new XMLHttpRequest();
             rgbPackage = pixel[0]+", "+pixel[1]+", "+pixel[2]

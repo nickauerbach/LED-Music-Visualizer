@@ -8,6 +8,7 @@ from time import sleep  # To add delay
 import RPi.GPIO as GPIO # To use GPIO pins
 import board
 import neopixel
+import random
 
 def Visualizer():
 
@@ -47,45 +48,47 @@ def Light_Modes(color, pattern):
     GPIO.setmode(GPIO.BCM)
     pixels = neopixel.NeoPixel(board.D18, 20)
     if mode = 1:
+        rand_num = random.randint(0,19)
         while True:
             for i in range(19, 0, -1):
                 pixels[i] = (0,0,0)
-            for i in range(20)
+            for i in range(rand_num, 0 -1)
                 pixels[i] = (color[0], color[1], color[2])
-            sleep(6)
+            sleep(0.1)
             pixels.show()
 
     elif mode = 2:
         while True:
             for i in range(19, 0, -1):
                 pixels[i] = (0,0,0)
-            for i in range(20)
+            for i in range(19, 0, -1)
                 pixels[i] = (color[0], color[1], color[2])
-            sleep(4)
+                sleep(0.2)
+            for i in range(0, 19, 1)
+                pixels[i] = (color[0], color[1], color[2])
+                sleep(0.2)
             pixels.show()
 
     elif mode = 3:
         while True:
             for i in range(19, 0, -1):
                 pixels[i] = (0,0,0)
-            for i in range(20)
+            for i in range(19, 0 -1)
                 pixels[i] = (color[0], color[1], color[2])
-            sleep(2)
+            sleep(1)
             pixels.show()
 
     elif mode = 4:
         while True:
-            for i in range(19, 0, -1):
-                pixels[i] = (0,0,0)
-            for i in range(20)
+            for i in range(19, 0, -1)
                 pixels[i] = (color[0], color[1], color[2])
-            sleep(0)
             pixels.show()
 
     else:
         while True:
             for i in range(19, 0, -1):
                 pixels[i] = (0,0,0)
+            pixels.show()
 
 app = Flask(__name__)
 
@@ -159,6 +162,3 @@ def color_picker():
     rgb_list = color.split(",")
     rgb_list = [int(i) for i in rgb_list]
     return rgb_list
-
-if __name__ == "__main__":
-    app.run(debug=True)

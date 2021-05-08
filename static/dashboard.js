@@ -2,14 +2,14 @@
 
 var button1 = $("#light_mode1");
 button1.click(function() {
-    if (button1.text() === "Slow Mode") {
+    if (button1.text() === "Random Mode") {
         $.ajax({
             url: "/light_mode1_on",
             type: "post",
             success: function(response) {
                 console.log(response);
-                button1.text("Slow Mode On");
-                button2.text("Medium Flash");
+                button1.text("Random Mode On");
+                button2.text("Snake Flash");
                 button3.text("Strobe Party");
                 button4.text("Illuminate");
                 button5.text("Music Mode");
@@ -20,7 +20,7 @@ button1.click(function() {
             url: "/light_mode1_off",
             type: "post",
             success: function() {
-                button1.text("Slow Mode");
+                button1.text("Random Mode");
             }
         })
     }
@@ -28,14 +28,14 @@ button1.click(function() {
 
 var button2 = $("#light_mode2");
 button2.click(function() {
-    if (button2.text() === "Medium Flash") {
+    if (button2.text() === "Snake Flash") {
         $.ajax({
             url: "/light_mode2_on",
             type: "post",
             success: function(response) {
                 console.log(response);
-                button1.text("Slow Mode");
-                button2.text("Medium Flash On");
+                button1.text("Random Mode");
+                button2.text("Snake Flash On");
                 button3.text("Strobe Party");
                 button4.text("Illuminate");
                 button5.text("Music Mode");
@@ -46,7 +46,7 @@ button2.click(function() {
             url: "/light_mode2_off",
             type: "post",
             success: function() {
-                button2.text("Medium Flash");
+                button2.text("Snake Flash");
             }
         })
     }
@@ -60,8 +60,8 @@ button3.click(function() {
             type: "post",
             success: function(response) {
                 console.log(response);
-                button1.text("Slow Mode");
-                button2.text("Medium Flash");
+                button1.text("Random Mode");
+                button2.text("Snake Flash");
                 button3.text("Strobe Party On");
                 button4.text("Illuminate");
                 button5.text("Music Mode");
@@ -86,8 +86,8 @@ button4.click(function() {
             type: "post",
             success: function(response) {
                 console.log(response);
-                button1.text("Slow Mode");
-                button2.text("Medium Flash");
+                button1.text("Random Mode");
+                button2.text("Snake Flash");
                 button3.text("Strobe Party");
                 button4.text("Illuminate On");
                 button5.text("Music Mode");
@@ -112,8 +112,8 @@ button5.click(function() {
             type: "post",
             success: function(response) {
                 console.log(response);
-                button1.text("Slow Mode");
-                button2.text("Medium Flash");
+                button1.text("Random Mode");
+                button2.text("Snake Flash");
                 button3.text("Strobe Party");
                 button4.text("Illuminate");
                 button5.text("Music Mode On");
