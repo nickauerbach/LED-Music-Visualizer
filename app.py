@@ -60,114 +60,135 @@ def Visualizer():
         pixels.show()
         previous_output = output
 
-def Light_Modes(color, pattern):
-    mode = pattern
-    GPIO.setmode(GPIO.BCM)
-    pixels = neopixel.NeoPixel(board.D18, 20)
-    if mode == 1:
-        rand_num = random.randint(0,19)
-        while True:
-            for i in range(19, 0, -1):
-                pixels[i] = (0,0,0)
-            for i in range(rand_num, 0, -1):
-                pixels[i] = (color[0], color[1], color[2])
-            sleep(0.1)
-            pixels.show()
-
-    elif mode == 2:
-        while True:
-            for i in range(19, 0, -1):
-                pixels[i] = (0,0,0)
-            for i in range(19, 0, -1):
-                pixels[i] = (color[0], color[1], color[2])
-                sleep(0.2)
-            for i in range(0, 19, 1):
-                pixels[i] = (color[0], color[1], color[2])
-                sleep(0.2)
-            pixels.show()
-
-    elif mode == 3:
-        while True:
-            for i in range(19, 0, -1):
-                pixels[i] = (0,0,0)
-            for i in range(19, 0 -1):
-                pixels[i] = (color[0], color[1], color[2])
-            sleep(.5)
-            pixels.show()
-
-    elif mode == 4:
-        while True:
-            for i in range(19, 0, -1):
-                pixels[i] = (color[0], color[1], color[2])
-            pixels.show()
-
-    else:
-        while True:
-            for i in range(19, 0, -1):
-                pixels[i] = (0,0,0)
-            pixels.show()
-
 app = Flask(__name__)
 
 @app.route("/")
 def home():
     return render_template("dashboard.html")
 
+global rgb_list
+
 @app.route("/color_picker", methods =["GET", "POST"])
 def color_picker():
     choice = request.data
     color = choice.decode('utf-8')
-    global rgb_list = [int(i) for i in color.split(",")]
+    global rgb_list
+    rgb_list = [int(i) for i in color.split(",")]
     return "ok"
 
 @app.route("/light_mode1_on", methods =["POST"])
 def light_mode1_on():
-    Light_Modes(rgb_list, 1)
+    GPIO.setmode(GPIO.BCM)
+    pixels = neopixel.NeoPixel(board.D18, 20)
+    for i in range(19, 0, -1):
+        pixels[i] = (0,0,0)
+    global rgb_list
+    rand_num = random.randint(0,19)
+    while True:
+        for i in range(19, 0, -1):
+            pixels[i] = (0,0,0)
+        for i in range(rand_num, 0, -1):
+            pixels[i] = (color[0], color[1], color[2])
+        sleep(0.1)
+        pixels.show()
+
     return "ok"
 
 @app.route("/light_mode1_off", methods =["POST"])
 def light_mode1_off():
-    Light_Modes(rgb_list, 5)
+    GPIO.setmode(GPIO.BCM)
+    pixels = neopixel.NeoPixel(board.D18, 20)
+    for i in range(19, 0, -1):
+        pixels[i] = (0,0,0)
     return "ok"
 
 @app.route("/light_mode2_on", methods =["POST"])
 def light_mode2_on():
-    Light_Modes(rgb_list, 2)
+    GPIO.setmode(GPIO.BCM)
+    pixels = neopixel.NeoPixel(board.D18, 20)
+        for i in range(19, 0, -1):
+        pixels[i] = (0,0,0)
+    global rgb_list
+    while True:
+        for i in range(19, 0, -1):
+            pixels[i] = (0,0,0)
+        for i in range(19, 0, -1):
+            pixels[i] = (color[0], color[1], color[2])
+            sleep(0.2)
+        for i in range(0, 19, 1):
+            pixels[i] = (color[0], color[1], color[2])
+            sleep(0.2)
+        pixels.show()
     return "ok"
 
 @app.route("/light_mode2_off", methods =["POST"])
 def light_mode2_off():
-    Light_Modes(rgb_list, 5)
+    GPIO.setmode(GPIO.BCM)
+    pixels = neopixel.NeoPixel(board.D18, 20)
+    for i in range(19, 0, -1):
+        pixels[i] = (0,0,0)
     return "ok"
 
 @app.route("/light_mode3_on", methods =["POST"])
 def light_mode3_on():
-    Light_Modes(rgb_list, 3)
+    GPIO.setmode(GPIO.BCM)
+    pixels = neopixel.NeoPixel(board.D18, 20)
+    for i in range(19, 0, -1):
+        pixels[i] = (0,0,0)
+    global rgb_list
+    while True:
+        for i in range(19, 0, -1):
+            pixels[i] = (0,0,0)
+        for i in range(19, 0 -1):
+            pixels[i] = (color[0], color[1], color[2])
+        sleep(.5)
+        pixels.show()
     return "ok"
 
 @app.route("/light_mode3_off", methods =["POST"])
 def light_mode3_off():
-    Light_Modes(rgb_list, 5)
+    GPIO.setmode(GPIO.BCM)
+    pixels = neopixel.NeoPixel(board.D18, 20)
+    for i in range(19, 0, -1):
+        pixels[i] = (0,0,0)
     return "ok"
 
 @app.route("/illuminate_on", methods =["POST"])
 def illuminate_on():
-    Light_Modes(rgb_list, 4)
+    GPIO.setmode(GPIO.BCM)
+    pixels = neopixel.NeoPixel(board.D18, 20)
+    for i in range(19, 0, -1):
+        pixels[i] = (0,0,0)
+    global rgb_list
+    while True:
+        for i in range(19, 0, -1):
+            pixels[i] = (color[0], color[1], color[2])
+        pixels.show()
     return "ok"
 
 @app.route("/illuminate_off", methods =["POST"])
 def illuminate_off():
-    Light_Modes(rgb_list, 5)
+    GPIO.setmode(GPIO.BCM)
+    pixels = neopixel.NeoPixel(board.D18, 20)
+    for i in range(19, 0, -1):
+        pixels[i] = (0,0,0)
     return "ok"
 
 @app.route("/music_mode_on", methods =["POST"])
 def music_mode_on():
+    GPIO.setmode(GPIO.BCM)
+    pixels = neopixel.NeoPixel(board.D18, 20)
+    for i in range(19, 0, -1):
+        pixels[i] = (0,0,0)
     Visualizer()
     return "ok"
 
 @app.route("/music_mode_off", methods =["POST"])
 def music_mode_off():
-    Light_Modes(rgb_list, 5)
+    GPIO.setmode(GPIO.BCM)
+    pixels = neopixel.NeoPixel(board.D18, 20)
+    for i in range(19, 0, -1):
+        pixels[i] = (0,0,0)
     return "ok"
 
 # if __name__ == '__main__':
