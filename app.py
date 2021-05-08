@@ -91,7 +91,6 @@ def light_mode1_on():
             pixels[i] = (color[0], color[1], color[2])
         sleep(0.1)
         pixels.show()
-
     return "ok"
 
 @app.route("/light_mode1_off", methods =["POST"])
