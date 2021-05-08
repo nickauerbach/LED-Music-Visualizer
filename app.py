@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 import json
+import random
 
 # Importing modules for sensor
 import spidev # To communicate with SPI devices
@@ -8,7 +9,7 @@ from time import sleep  # To add delay
 import RPi.GPIO as GPIO # To use GPIO pins
 import board
 import neopixel
-import random
+
 
 def Visualizer():
 
@@ -29,58 +30,74 @@ def Visualizer():
         data = ((adc[1]&3) << 8) + adc[2]
         return data
 
-    output = 0
+    previous_output=0
+
+    for i in range(19, 0, -1):
+        pixels[i] = (0,0,0)
 
     while True:
-        for i in range(19, 0, -1):
-            pixels[i] = (0,0,0)
+
         output = analogInput(0) # Reading from CH0
         output = interp(output, [0, 200], [0, 20])
         output = int(output.item())
-        print(output)
+
+        if (previous_output > output):
+            pixels_to_clear = previous_output-output
+            for i in range(previous_output-1, previous_output-pixels_to_clear-1, -1):
+                pixels[i] = (0,0,0)
+
         for i in range(output):
-            pixels[i] = (255,0,0)
-        sleep(0.1)
+            if (i<10):
+                blue = int(255-i*25.5)
+                green = int(i*25.5)
+                pixels[i] = (0,green,blue)
+
+            if (i>=10):
+                red = int((i-10)*25.5)
+                green = int(255-(i-10)*25.5)
+                pixels[i] = (red,green,0)
+
         pixels.show()
+        previous_output = output
 
 def Light_Modes(color, pattern):
     mode = pattern
     GPIO.setmode(GPIO.BCM)
     pixels = neopixel.NeoPixel(board.D18, 20)
-    if mode = 1:
+    if mode == 1:
         rand_num = random.randint(0,19)
         while True:
             for i in range(19, 0, -1):
                 pixels[i] = (0,0,0)
-            for i in range(rand_num, 0 -1)
+            for i in range(rand_num, 0, -1):
                 pixels[i] = (color[0], color[1], color[2])
             sleep(0.1)
             pixels.show()
 
-    elif mode = 2:
+    elif mode == 2:
         while True:
             for i in range(19, 0, -1):
                 pixels[i] = (0,0,0)
-            for i in range(19, 0, -1)
+            for i in range(19, 0, -1):
                 pixels[i] = (color[0], color[1], color[2])
                 sleep(0.2)
-            for i in range(0, 19, 1)
+            for i in range(0, 19, 1):
                 pixels[i] = (color[0], color[1], color[2])
                 sleep(0.2)
             pixels.show()
 
-    elif mode = 3:
+    elif mode == 3:
         while True:
             for i in range(19, 0, -1):
                 pixels[i] = (0,0,0)
-            for i in range(19, 0 -1)
+            for i in range(19, 0 -1):
                 pixels[i] = (color[0], color[1], color[2])
-            sleep(1)
+            sleep(.5)
             pixels.show()
 
-    elif mode = 4:
+    elif mode == 4:
         while True:
-            for i in range(19, 0, -1)
+            for i in range(19, 0, -1):
                 pixels[i] = (color[0], color[1], color[2])
             pixels.show()
 
@@ -96,69 +113,62 @@ app = Flask(__name__)
 def home():
     return render_template("dashboard.html")
 
-@app.route("/light_mode1_on", methods =["POST"])
-def light_mode1_on():
-    choice = color_picker()
-    Light_Modes(choice, 1)
-    return ""
-
-@app.route("/light_mode1_off", methods =["POST"])
-def light_mode1_off():
-    choice = color_picker()
-    Light_Modes(choice, 5)
-    return ""
-
-@app.route("/light_mode2_on", methods =["POST"])
-def light_mode2_on():
-    choice = color_picker()
-    Light_Modes(choice, 2)
-    return ""
-
-@app.route("/light_mode2_off", methods =["POST"])
-def light_mode2_off():
-    choice = color_picker()
-    Light_Modes(choice, 5)
-    return ""
-
-@app.route("/light_mode3_on", methods =["POST"])
-def light_mode3_on():
-    choice = color_picker()
-    Light_Modes(choice, 3)
-    return ""
-
-@app.route("/light_mode3_off", methods =["POST"])
-def light_mode3_off():
-    choice = color_picker()
-    Light_Modes(choice, 5)
-    return ""
-
-@app.route("/illuminate_on", methods =["POST"])
-def illuminate_on():
-    choice = color_picker()
-    Light_Modes(choice, 4)
-    return ""
-
-@app.route("/illuminate_off", methods =["POST"])
-def illuminate_off():
-    choice = color_picker()
-    Light_Modes(choice, 5)
-    return ""
-
-@app.route("/music_mode_on", methods =["POST"])
-def music_mode_on():
-    Visualizer()
-    return ""
-
-@app.route("/music_mode_off", methods =["POST"])
-def music_mode_off():
-    choice = color_picker()
-    Light_Modes(choice, 5)
-    return ""
-
 @app.route("/color_picker", methods =["GET", "POST"])
 def color_picker():
     choice = request.data
     color = choice.decode('utf-8')
-    rgb_list = color.split(",")
-    rgb_list = [int(i) for i in rgb_list]
-    return rgb_list
+    global rgb_list = [int(i) for i in color.split(",")]
+    return "ok"
+
+@app.route("/light_mode1_on", methods =["POST"])
+def light_mode1_on():
+    Light_Modes(rgb_list, 1)
+    return "ok"
+
+@app.route("/light_mode1_off", methods =["POST"])
+def light_mode1_off():
+    Light_Modes(rgb_list, 5)
+    return "ok"
+
+@app.route("/light_mode2_on", methods =["POST"])
+def light_mode2_on():
+    Light_Modes(rgb_list, 2)
+    return "ok"
+
+@app.route("/light_mode2_off", methods =["POST"])
+def light_mode2_off():
+    Light_Modes(rgb_list, 5)
+    return "ok"
+
+@app.route("/light_mode3_on", methods =["POST"])
+def light_mode3_on():
+    Light_Modes(rgb_list, 3)
+    return "ok"
+
+@app.route("/light_mode3_off", methods =["POST"])
+def light_mode3_off():
+    Light_Modes(rgb_list, 5)
+    return "ok"
+
+@app.route("/illuminate_on", methods =["POST"])
+def illuminate_on():
+    Light_Modes(rgb_list, 4)
+    return "ok"
+
+@app.route("/illuminate_off", methods =["POST"])
+def illuminate_off():
+    Light_Modes(rgb_list, 5)
+    return "ok"
+
+@app.route("/music_mode_on", methods =["POST"])
+def music_mode_on():
+    Visualizer()
+    return "ok"
+
+@app.route("/music_mode_off", methods =["POST"])
+def music_mode_off():
+    Light_Modes(rgb_list, 5)
+    return "ok"
+
+# if __name__ == '__main__':
+#     app.run(debug=True)
