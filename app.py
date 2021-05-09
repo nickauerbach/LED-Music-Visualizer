@@ -117,6 +117,11 @@ def light_switch():
             pixels.show()
             print("mode 4")
             print(rgb_list[0])
+    GPIO.setmode(GPIO.BCM)
+    pixels = neopixel.NeoPixel(board.D18, 20)
+    for i in range(19, -1, -1):
+        pixels[i] = (0,0,0)
+
 
 # def light_switch():
 #     global light_mode
