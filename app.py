@@ -82,6 +82,7 @@ def light_switch():
                 sleep(0.1)
                 pixels.show()
                 print("mode 1")
+                print(rgb_list[0])
         elif light_mode == 2:
             while light_mode == 2:
                 for i in range(19, 0, -1):
@@ -94,6 +95,7 @@ def light_switch():
                     sleep(0.2)
                 pixels.show()
                 print("mode 2")
+                print(rgb_list[0])
         elif light_mode == 3:
             while light_mode == 3:
                 for i in range(19, 0, -1):
@@ -103,12 +105,14 @@ def light_switch():
                 sleep(.5)
                 pixels.show()
                 print("mode 3")
+                print(rgb_list[0])
         elif light_mode == 4:
             while light_mode == 4:
                 for i in range(19, 0, -1):
                     pixels[i] = (color[0], color[1], color[2])
                 pixels.show()
                 print("mode 4")
+                print(rgb_list[0])
 
 # def light_switch():
 #     global light_mode
