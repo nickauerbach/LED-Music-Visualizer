@@ -35,7 +35,7 @@ def Visualizer():
 
     previous_output=0
 
-    for i in range(19, 0, -1):
+    for i in range(19, -1, -1):
         pixels[i] = (0,0,0)
 
     global light_mode
@@ -67,7 +67,7 @@ def Visualizer():
 def light_switch():
     GPIO.setmode(GPIO.BCM)
     pixels = neopixel.NeoPixel(board.D18, 20)
-    for i in range(19, 0, -1):
+    for i in range(19, -1, -1):
         pixels[i] = (0,0,0)
     global light_mode
     global rgb_list
@@ -83,36 +83,36 @@ def light_switch():
             print("mode 1")
             print(rgb_list[0])
         while light_mode == 2:
-            for i in range(19, 0, -1):
+            for i in range(19, -1, -1):
                 pixels[i] = (rgb_list[0], rgb_list[1], rgb_list[2])
                 pixels.show()
                 sleep(0.2)
-            for i in range(19, 0, -1):
+            for i in range(19, -1, -1):
                 pixels[i] = (0, 0, 0)
                 pixels.show()
                 sleep(0.2)
-            for i in range(0, 19, 1):
+            for i in range(0, 20, 1):
                 pixels[i] = (rgb_list[0], rgb_list[1], rgb_list[2])
                 pixels.show()
                 sleep(0.2)
-            for i in range(0, 19, 1):
+            for i in range(0, 20, 1):
                 pixels[i] = (0, 0, 0)
                 pixels.show()
                 sleep(0.2)
             print("mode 2")
             print(rgb_list[0])
         while light_mode == 3:
-            for i in range(19, 0, -1):
+            for i in range(19, -1, -1):
                 pixels[i] = (0,0,0)
                 pixels.show()
             sleep(.5)
-            for i in range(19, 0 -1):
+            for i in range(19, -1, -1):
                 pixels[i] = (rgb_list[0], rgb_list[1], rgb_list[2])
                 pixels.show()
             print("mode 3")
             print(rgb_list[0])
         while light_mode == 4:
-            for i in range(19, 0, -1):
+            for i in range(19, -1, -1):
                 pixels[i] = (rgb_list[0], rgb_list[1], rgb_list[2])
             pixels.show()
             print("mode 4")
