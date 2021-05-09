@@ -10,7 +10,6 @@ import RPi.GPIO as GPIO # To use GPIO pins
 import board
 import neopixel
 
-
 def Visualizer():
 
     # Start SPI connection
@@ -35,7 +34,8 @@ def Visualizer():
     for i in range(19, 0, -1):
         pixels[i] = (0,0,0)
 
-    while True:
+    global light_mode
+    while light_mode == 5:
 
         output = analogInput(0) # Reading from CH0
         output = interp(output, [0, 200], [0, 20])
@@ -60,13 +60,58 @@ def Visualizer():
         pixels.show()
         previous_output = output
 
+global rgb_list
+rgb_list = [1,2,3]
+global light_mode
+
+def light_switch():
+    GPIO.setmode(GPIO.BCM)
+    pixels = neopixel.NeoPixel(board.D18, 20)
+    for i in range(19, 0, -1):
+        pixels[i] = (0,0,0)
+    global light_mode
+    global rgb_list
+    while light_mode != 0:
+        if light_mode == 1:
+            while light_mode == 1:
+                rand_num = random.randint(0,19)
+                for i in range(19, 0, -1):
+                    pixels[i] = (0,0,0)
+                for i in range(rand_num, 0, -1):
+                    pixels[i] = (color[0], color[1], color[2])
+                sleep(0.1)
+                pixels.show()
+        elif light_mode == 2:
+            while light_mode == 2:
+                for i in range(19, 0, -1):
+                    pixels[i] = (0,0,0)
+                for i in range(19, 0, -1):
+                    pixels[i] = (color[0], color[1], color[2])
+                    sleep(0.2)
+                for i in range(0, 19, 1):
+                    pixels[i] = (color[0], color[1], color[2])
+                    sleep(0.2)
+                pixels.show()
+        elif light_mode == 3:
+            while light_mode == 3:
+                for i in range(19, 0, -1):
+                    pixels[i] = (0,0,0)
+                for i in range(19, 0 -1):
+                    pixels[i] = (color[0], color[1], color[2])
+                sleep(.5)
+                pixels.show()
+        elif light_mode == 4:
+            while light_mode == 4:
+                for i in range(19, 0, -1):
+                    pixels[i] = (color[0], color[1], color[2])
+                pixels.show()
+
+
 app = Flask(__name__)
 
 @app.route("/")
 def home():
     return render_template("dashboard.html")
-
-global rgb_list
 
 @app.route("/color_picker", methods =["GET", "POST"])
 def color_picker():
@@ -78,19 +123,8 @@ def color_picker():
 
 @app.route("/light_mode1_on", methods =["POST"])
 def light_mode1_on():
-    GPIO.setmode(GPIO.BCM)
-    pixels = neopixel.NeoPixel(board.D18, 20)
-    for i in range(19, 0, -1):
-        pixels[i] = (0,0,0)
-    global rgb_list
-    rand_num = random.randint(0,19)
-    while True:
-        for i in range(19, 0, -1):
-            pixels[i] = (0,0,0)
-        for i in range(rand_num, 0, -1):
-            pixels[i] = (color[0], color[1], color[2])
-        sleep(0.1)
-        pixels.show()
+    global light_mode
+    light_mode = 1
     return "ok"
 
 @app.route("/light_mode1_off", methods =["POST"])
@@ -99,25 +133,14 @@ def light_mode1_off():
     pixels = neopixel.NeoPixel(board.D18, 20)
     for i in range(19, 0, -1):
         pixels[i] = (0,0,0)
+    global light_mode
+    light_mode = 0
     return "ok"
 
 @app.route("/light_mode2_on", methods =["POST"])
 def light_mode2_on():
-    GPIO.setmode(GPIO.BCM)
-    pixels = neopixel.NeoPixel(board.D18, 20)
-        for i in range(19, 0, -1):
-        pixels[i] = (0,0,0)
-    global rgb_list
-    while True:
-        for i in range(19, 0, -1):
-            pixels[i] = (0,0,0)
-        for i in range(19, 0, -1):
-            pixels[i] = (color[0], color[1], color[2])
-            sleep(0.2)
-        for i in range(0, 19, 1):
-            pixels[i] = (color[0], color[1], color[2])
-            sleep(0.2)
-        pixels.show()
+    global light_mode
+    light_mode = 2
     return "ok"
 
 @app.route("/light_mode2_off", methods =["POST"])
@@ -126,22 +149,14 @@ def light_mode2_off():
     pixels = neopixel.NeoPixel(board.D18, 20)
     for i in range(19, 0, -1):
         pixels[i] = (0,0,0)
+    global light_mode
+    light_mode = 0
     return "ok"
 
 @app.route("/light_mode3_on", methods =["POST"])
 def light_mode3_on():
-    GPIO.setmode(GPIO.BCM)
-    pixels = neopixel.NeoPixel(board.D18, 20)
-    for i in range(19, 0, -1):
-        pixels[i] = (0,0,0)
-    global rgb_list
-    while True:
-        for i in range(19, 0, -1):
-            pixels[i] = (0,0,0)
-        for i in range(19, 0 -1):
-            pixels[i] = (color[0], color[1], color[2])
-        sleep(.5)
-        pixels.show()
+    global light_mode
+    light_mode = 3
     return "ok"
 
 @app.route("/light_mode3_off", methods =["POST"])
@@ -150,19 +165,15 @@ def light_mode3_off():
     pixels = neopixel.NeoPixel(board.D18, 20)
     for i in range(19, 0, -1):
         pixels[i] = (0,0,0)
+    global light_mode
+    light_mode = 0
     return "ok"
 
 @app.route("/illuminate_on", methods =["POST"])
 def illuminate_on():
-    GPIO.setmode(GPIO.BCM)
-    pixels = neopixel.NeoPixel(board.D18, 20)
-    for i in range(19, 0, -1):
-        pixels[i] = (0,0,0)
-    global rgb_list
-    while True:
-        for i in range(19, 0, -1):
-            pixels[i] = (color[0], color[1], color[2])
-        pixels.show()
+    global light_mode
+    light_mode = 4
+    light_switch()
     return "ok"
 
 @app.route("/illuminate_off", methods =["POST"])
@@ -171,14 +182,14 @@ def illuminate_off():
     pixels = neopixel.NeoPixel(board.D18, 20)
     for i in range(19, 0, -1):
         pixels[i] = (0,0,0)
+    global light_mode
+    light_mode = 0
     return "ok"
 
 @app.route("/music_mode_on", methods =["POST"])
 def music_mode_on():
-    GPIO.setmode(GPIO.BCM)
-    pixels = neopixel.NeoPixel(board.D18, 20)
-    for i in range(19, 0, -1):
-        pixels[i] = (0,0,0)
+    global light_mode
+    light_mode = 5
     Visualizer()
     return "ok"
 
@@ -188,6 +199,8 @@ def music_mode_off():
     pixels = neopixel.NeoPixel(board.D18, 20)
     for i in range(19, 0, -1):
         pixels[i] = (0,0,0)
+    global light_mode
+    light_mode = 0
     return "ok"
 
 # if __name__ == '__main__':
