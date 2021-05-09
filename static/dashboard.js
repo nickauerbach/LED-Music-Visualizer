@@ -10,7 +10,8 @@ button1.click(function() {
         button5.text("Music Mode");
         $.ajax({
             url: "/light_mode1_on",
-            type: "post"
+            type: "post",
+            timeout: 100
         });
     } else {
         button1.text("Random Mode");
@@ -31,7 +32,8 @@ button2.click(function() {
         button5.text("Music Mode");
         $.ajax({
             url: "/light_mode2_on",
-            type: "post"
+            type: "post",
+            timeout: 100
         });
     } else {
         button2.text("Snake Flash");
@@ -53,6 +55,7 @@ button3.click(function() {
         $.ajax({
             url: "/light_mode3_on",
             type: "post",
+            timeout: 100
         });
     } else {
         button3.text("Strobe Party");
@@ -73,7 +76,8 @@ button4.click(function() {
         button5.text("Music Mode");
         $.ajax({
             url: "/illuminate_on",
-            type: "post"
+            type: "post",
+            timeout: 100
         });
     } else {
         button4.text("Illuminate");
@@ -94,7 +98,8 @@ button5.click(function() {
         button5.text("Music Mode On");
         $.ajax({
             url: "/music_mode_on",
-            type: "post"
+            type: "post",
+            timeout: 100
         });
     } else {
         button5.text("Music Mode");

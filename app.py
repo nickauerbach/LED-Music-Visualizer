@@ -2,6 +2,10 @@ from flask import Flask, render_template, request
 import json
 import random
 
+global rgb_list
+rgb_list = [1,2,3]
+global light_mode
+
 # Importing modules for sensor
 import spidev # To communicate with SPI devices
 from numpy import interp    # To scale values
@@ -60,10 +64,6 @@ def Visualizer():
         pixels.show()
         previous_output = output
 
-global rgb_list
-rgb_list = [1,2,3]
-global light_mode
-
 def light_switch():
     GPIO.setmode(GPIO.BCM)
     pixels = neopixel.NeoPixel(board.D18, 20)
@@ -81,6 +81,7 @@ def light_switch():
                     pixels[i] = (color[0], color[1], color[2])
                 sleep(0.1)
                 pixels.show()
+                print("mode 1")
         elif light_mode == 2:
             while light_mode == 2:
                 for i in range(19, 0, -1):
@@ -92,6 +93,7 @@ def light_switch():
                     pixels[i] = (color[0], color[1], color[2])
                     sleep(0.2)
                 pixels.show()
+                print("mode 2")
         elif light_mode == 3:
             while light_mode == 3:
                 for i in range(19, 0, -1):
@@ -100,12 +102,38 @@ def light_switch():
                     pixels[i] = (color[0], color[1], color[2])
                 sleep(.5)
                 pixels.show()
+                print("mode 3")
         elif light_mode == 4:
             while light_mode == 4:
                 for i in range(19, 0, -1):
                     pixels[i] = (color[0], color[1], color[2])
                 pixels.show()
+                print("mode 4")
 
+# def light_switch():
+#     global light_mode
+#     global rgb_list
+#     while light_mode != 0:
+#         if light_mode == 1:
+#             while light_mode == 1:
+#                 print("mode 1")
+#                 print(rgb_list[0])
+#         elif light_mode == 2:
+#             while light_mode == 2:
+#                 print("mode 2")
+#                 print(rgb_list[0])
+#         elif light_mode == 3:
+#             while light_mode == 3:
+#                 print("mode 3")
+#                 print(rgb_list[0])
+#         elif light_mode == 4:
+#             while light_mode == 4:
+#                 print("mode 4")
+#                 print(rgb_list[0])
+#         elif light_mode == 5:
+#             while light_mode ==5:
+#                 print ("mode 5")
+#                 print(rgb_list[0])
 
 app = Flask(__name__)
 
@@ -125,6 +153,7 @@ def color_picker():
 def light_mode1_on():
     global light_mode
     light_mode = 1
+    light_switch()
     return "ok"
 
 @app.route("/light_mode1_off", methods =["POST"])
@@ -141,6 +170,7 @@ def light_mode1_off():
 def light_mode2_on():
     global light_mode
     light_mode = 2
+    light_switch()
     return "ok"
 
 @app.route("/light_mode2_off", methods =["POST"])
@@ -157,6 +187,7 @@ def light_mode2_off():
 def light_mode3_on():
     global light_mode
     light_mode = 3
+    light_switch()
     return "ok"
 
 @app.route("/light_mode3_off", methods =["POST"])
@@ -203,5 +234,5 @@ def music_mode_off():
     light_mode = 0
     return "ok"
 
-# if __name__ == '__main__':
-#     app.run(debug=True)
+if __name__ == '__main__':
+    app.run(debug=True)
