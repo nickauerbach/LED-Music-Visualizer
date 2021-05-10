@@ -1,19 +1,24 @@
-//event handling for different light mode buttons
+// event handling for different light mode buttons (each button uses same logic)
 
+// using ajax, call appropriate app routes based on button text (similar logic to CS121 labs)
 var button1 = $("#light_mode1");
 button1.click(function() {
     if (button1.text() === "Random Mode") {
+        // change button labels
         button1.text("Random Mode On");
         button2.text("Snake Flash");
         button3.text("Strobe Party");
         button4.text("Illuminate");
         button5.text("Music Mode");
         $.ajax({
+            // turn on button and corresponding light mode
             url: "/light_mode1_on",
             type: "post",
+            // use timeout argument to complete request when infinite while loop is still running
             timeout: 100
         });
     } else {
+        // turn off button and corresponding light mode
         button1.text("Random Mode");
         $.ajax({
             url: "/light_mode1_off",

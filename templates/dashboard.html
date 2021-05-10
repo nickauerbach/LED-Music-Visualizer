@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <!-- CSS for sidebar with buttons -->
     <style>
         .sidenav {
           width: 300px;
@@ -96,6 +97,7 @@
     <h5 style="color:purple; font-family: Verdana; font-weight: bold; font-size: 20 px; text-align: center; padding-top: 10px;">Select your illumination pattern and desired color!</h5>
     <h5 style="color:purple; font-family: Verdana; font-weight: bold; font-size: 20 px; text-align: center; padding-top: 10px; padding-bottom: 20 px;">Click the color picker below.</h5>
 </head>
+<!-- buttons with sidenav class formatting -->
 <body style="background-color:#D8BFD8;">
     <div class="sidenav">
       <button id="light_mode1" type="button">Random Mode</button>
@@ -105,6 +107,7 @@
       <button id="music_mode" type="button">Music Mode</button>
     </div>
     <div class="preview"></div>
+    <!-- RGB labels in color picker -->
     <div class="colorpicker" style="display:none">
         <canvas id="picker" var="3" width="200" height="200"></canvas>
         <div class="controls">
