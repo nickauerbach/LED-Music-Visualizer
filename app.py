@@ -109,6 +109,7 @@ def light_switch():
             for i in range(19, -1, -1):
                 pixels[i] = (rgb_list[0], rgb_list[1], rgb_list[2])
                 pixels.show()
+                sleep(.002)
             print("mode 3")
             print(rgb_list[0])
         while light_mode == 4:

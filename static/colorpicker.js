@@ -6,7 +6,7 @@ $(function(){
     var canvasPosition = canvas.getContext('2d');
     var image = new Image();
     image.onload = function () {
-        canvasPosition.drawImage(image, 0, 0, image.width, image.height);
+        canvasPosition.drawImage(image, 0, 0, 200, 200);
     }
     var imageSrc="../static/colorwheel3.png";
     image.src = imageSrc;
